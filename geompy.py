@@ -2,26 +2,24 @@
 
 import argparse
 import datetime
-from spectrum import *
-from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.pyplot as plt 
+from geometry import *
 import logging
 import numpy as np
 logging.basicConfig(filename='geompy.log',level=logging.DEBUG)
-
-class geometry:
 
 def readxyz(fn):
    f = open(fn, 'r')
    lines=f.readlines()
    nat=int(lines[0])
-   geom=[]
+   geom=Geometry()
    for line in lines[2:]:
-      lbl=line[0]
-      x=line[1]
-      y=line[2]
-      z=line[3]
-      geom.append([lbl,x,y,z])
+      item=line.split()
+      lbl=item[0]
+      x=item[1]
+      y=item[2]
+      z=item[3]
+      logging.info("Adding atom from file {0} : {1} {2} {3} {4}".format(fn, lbl, x, y, z))
+      geom.addAtom(lbl,x,y,z)
    return geom
 
 def main():
@@ -30,9 +28,12 @@ def main():
    args = parser.parse_args()
 #Default values
 #
-   geomfiles=args.geoms
+   geomfiles=args.geoms.split()
+   geoms=[]
    for f in geomfiles:
-      geoms.append(readxyz(f))
+      geom=readxyz(f)
+      print geom
+      geoms.append(geom)
 
 if __name__ == '__main__':
     main()
