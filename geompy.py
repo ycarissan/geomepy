@@ -18,7 +18,7 @@ def readxyz(fn):
       x=float(item[1])
       y=float(item[2])
       z=float(item[3])
-      logging.info("Adding atom from file {0} : {1} {2} {3} {4}".format(fn, lbl, x, y, z))
+      logging.debug("Adding atom from file {0} : {1} {2} {3} {4}".format(fn, lbl, x, y, z))
       geom.addAtom(lbl,x,y,z)
    return geom
 
@@ -34,6 +34,13 @@ def main():
       geom=readxyz(f)
       print geom
       geoms.append(geom)
+   logging.info("Geometries read from files".format())
+   for g in geoms:
+      logging.info(g)
+   geoms[1].translateTo(geoms[0])
+   logging.info("Geometries centered".format())
+   for g in geoms:
+      logging.info(g)
 
 if __name__ == '__main__':
     main()

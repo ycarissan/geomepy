@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import logging
 import elements
 import numpy as np
 
@@ -26,14 +27,21 @@ class Geometry:
       return self.geom
 
    def getCenterofMass(self):
-      pos=np.array([0,0,0])
+      pos=np.array([0.,0.,0.])
       tot=0.0
       for k in self.geom.keys():
          a = self.geom[k]
          mass = float(a.getMass().split()[0])
          tot += mass
          pos += mass*a.getPos()
+      logging.info("Total mass: {0}".format(tot))
       return pos/tot
+
+   def translateTo(self, geomRef):
+      delta=geomRef.getCenterofMass()-self.getCenterofMass()
+      logging.info("DELTA = {0}".format(delta))
+      for k in self.geom.keys():
+         self.geom[k].pos += delta
 
 class Atom:
    def __init__(self, lbl, pos):
