@@ -36,7 +36,7 @@ class Atom:
       self.pos=pos
 
    def __str__(self):
-      val="{0} {1} {2} {3}".format(self.lbl, self.pos[0], self.pos[1], self.pos[2])
+      val="{0}\t{1}\t{2}\t{3}".format(self.lbl, self.pos[0], self.pos[1], self.pos[2])
       return val
    
    def getPos(self):
