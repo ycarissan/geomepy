@@ -15,9 +15,9 @@ def readxyz(fn):
    for line in lines[2:]:
       item=line.split()
       lbl=item[0]
-      x=item[1]
-      y=item[2]
-      z=item[3]
+      x=float(item[1])
+      y=float(item[2])
+      z=float(item[3])
       logging.info("Adding atom from file {0} : {1} {2} {3} {4}".format(fn, lbl, x, y, z))
       geom.addAtom(lbl,x,y,z)
    return geom

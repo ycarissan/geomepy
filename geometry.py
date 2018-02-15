@@ -12,9 +12,10 @@ class Geometry:
 
    def __str__(self):
       nat=len(self.geom)
-      val="{0} atoms\n".format(nat)
-      for a in self.geom.keys():
-         val += str(self.geom[a])+'\n'
+      val="{0} atoms\n\n".format(nat)
+      for k in self.geom.keys():
+         val += str(self.geom[k])+'\n'
+      val+="\nCenter of mass : {0}".format(self.getCenterofMass())
       return val
 
    def addAtom(self, lbl, x, y, z):
@@ -24,11 +25,15 @@ class Geometry:
    def getGeom(self):
       return self.geom
 
-   def getCenterofMass():
-      pos=np.array(0,0,0)
-      for a in self.geom:
-         pos=a.getMass()*a.getPos()
-      return pos
+   def getCenterofMass(self):
+      pos=np.array([0,0,0])
+      tot=0.0
+      for k in self.geom.keys():
+         a = self.geom[k]
+         mass = float(a.getMass().split()[0])
+         tot += mass
+         pos += mass*a.getPos()
+      return pos/tot
 
 class Atom:
    def __init__(self, lbl, pos):
@@ -46,7 +51,8 @@ class Atom:
       return self.lbl
 
    def getMass(self):
-      return elements.self.getLabel()
+      data = elements.__dict__[self.getLabel()]
+      return data.AtomicMass
 
 def main():
    print elements.Table
