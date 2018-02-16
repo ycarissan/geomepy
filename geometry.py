@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import logging
-import elements
+from elements import elements
+import elements.elements as elements
 import numpy as np
 
 class Geometry:
@@ -26,12 +27,25 @@ class Geometry:
    def getGeom(self):
       return self.geom
 
+   def getCoords(self):
+      val = [ (self.geom[k]).getPos() for k in self.geom.keys() ]
+      return val
+
+   def center(self):
+      x_av = np.average([ self.geom[k].getPos()[0] for k in self.geom.keys() ])
+      y_av = np.average([ self.geom[k].getPos()[1] for k in self.geom.keys() ])
+      z_av = np.average([ self.geom[k].getPos()[2] for k in self.geom.keys() ])
+      orig = np.array([ x_av, y_av, z_av ])
+      for k in self.geom.keys():
+         self.geom[k].move(-orig)
+
    def getCenterofMass(self):
       pos=np.array([0.,0.,0.])
       tot=0.0
       for k in self.geom.keys():
          a = self.geom[k]
          mass = float(a.getMass().split()[0])
+         mass=1.0
          tot += mass
          pos += mass*a.getPos()
       logging.info("Total mass: {0}".format(tot))
@@ -55,6 +69,9 @@ class Atom:
    def getPos(self):
       return self.pos
 
+   def move(self, v):
+      self.pos += v
+
    def getLabel(self):
       return self.lbl
 
@@ -63,7 +80,7 @@ class Atom:
       return data.AtomicMass
 
 def main():
-   print elements.Table
+   print (elements.Table)
 
 if __name__ == '__main__':
    main()

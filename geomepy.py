@@ -1,11 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import argparse
 import datetime
 from geometry import *
+from analysis import *
 import logging
 import numpy as np
-logging.basicConfig(filename='geompy.log',level=logging.DEBUG)
+logging.basicConfig(filename='geomepy.log',level=logging.DEBUG)
 
 def readxyz(fn):
    f = open(fn, 'r')
@@ -32,15 +33,16 @@ def main():
    geoms=[]
    for f in geomfiles:
       geom=readxyz(f)
-      print geom
       geoms.append(geom)
    logging.info("Geometries read from files".format())
    for g in geoms:
       logging.info(g)
-   geoms[1].translateTo(geoms[0])
+   geoms[0].center()
+   geoms[1].center()
    logging.info("Geometries centered".format())
    for g in geoms:
       logging.info(g)
+   compareGeoms(geoms[0], geoms[1])
 
 if __name__ == '__main__':
     main()
