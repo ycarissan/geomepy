@@ -25,7 +25,7 @@ def readxyz(fn):
 
 def main():
    parser = argparse.ArgumentParser()
-   parser.add_argument("-g", "--geoms", help="geometries to compare in xyz format", default="geom1.xyz geom2.xyz")
+   parser.add_argument("-g", "--geoms", help="geometries to compare in xyz format", default="../tests/geom1.xyz ../tests/geom2.xyz")
    args = parser.parse_args()
 #Default values
 #
