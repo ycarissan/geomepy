@@ -6,7 +6,7 @@ from geometry import *
 from analysis import *
 import logging
 import numpy as np
-logging.basicConfig(filename='geomepy.log',level=logging.DEBUG)
+logging.basicConfig(filename='geomepy.log',level=logging.INFO)
 
 def readxyz(fn):
    f = open(fn, 'r')
