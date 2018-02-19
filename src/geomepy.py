@@ -1,12 +1,19 @@
 #!/usr/bin/python3
 
+import sys
 import argparse
 import datetime
 from geometry import *
 from analysis import *
 import logging
 import numpy as np
+
 logging.basicConfig(filename='geomepy.log',level=logging.INFO)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
 
 def readxyz(fn):
    f = open(fn, 'r')
@@ -32,7 +39,12 @@ def main():
    geomfiles=args.geoms.split()
    geoms=[]
    for f in geomfiles:
-      geom=readxyz(f)
+      try:
+         geom=readxyz(f)
+      except:
+         logging.critical("Cannot read {0} file".format(f))
+         parser.print_help()
+         sys.exit(1)
       geoms.append(geom)
    logging.info("Geometries read from files".format())
    for g in geoms:
