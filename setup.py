@@ -36,7 +36,7 @@ setup(
     # For a discussion on single-sourcing the version across setup.py and the
     # project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.0.0a1',  # Required
+    version='1.0.0a7',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
@@ -115,8 +115,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['logging>=0.5.1.2',
-                      'pyquaternion>=0.9.2',
+    install_requires=['pyquaternion>=0.9.2',
                       'PeriodicElements>=1.0',
                      ],  # Optional
 
@@ -136,7 +135,7 @@ setup(
     #
     # If using Python 2.6 or earlier, then these have to be included in
     # MANIFEST.in as well.
-    package_data={  # Optional
+    package_data={ # Optional
     },
 
     # Although 'package_data' is the preferred approach, in some case you may

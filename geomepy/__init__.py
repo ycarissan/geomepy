@@ -1,7 +1,1 @@
-import geomepy
-
-def main():
-   """Entry point for the application script"""
-   print("Call your main application code here")
-   geomepy.main()
-    
+from geomepy.geomepy import main

@@ -1,8 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import logging
 import numpy as np
-import geometry
+import geomepy.geometry
 import math
 from pyquaternion import Quaternion
 

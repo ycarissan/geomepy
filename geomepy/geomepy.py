@@ -1,10 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import sys
 import argparse
 import datetime
-from geometry import *
-from analysis import *
+from geomepy.geometry import *
+from geomepy.analysis import *
 import logging
 import numpy as np
 
