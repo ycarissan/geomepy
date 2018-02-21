@@ -58,7 +58,6 @@ def compareGeoms(geom1, geom2):
    RMSD = math.sqrt((xnorm2+ynorm2-2.0*l_max)/(1.0*N))
    logging.info("RMSD {0}".format(RMSD))
    return RMSD, rotation
-   
 
 def main():
    print('analysis module')
