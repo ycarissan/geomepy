@@ -3,8 +3,12 @@
 import sys
 import argparse
 import datetime
-from geomepy.geometry import *
-from geomepy.analysis import *
+if (sys.version_info > (3, 0)):
+   from geomepy.geometry import *
+   from geomepy.analysis import *
+else:
+   from geometry import *
+   from analysis import *
 import logging
 import numpy as np
 

@@ -1,8 +1,12 @@
 #!/usr/bin/python
 
+import sys
 import logging
 import numpy as np
-import geomepy.geometry
+if (sys.version_info > (3, 0)):
+   import geomepy.geometry
+else:
+   import geometry
 import math
 from pyquaternion import Quaternion
 
