@@ -1,5 +1,22 @@
 #!/usr/bin/python
 
+"""
+   Main ``geomepy`` module
+   =======================
+   
+   Contains a routine to read xyz files
+   and the main routine of the geomepy program.
+   The only purpose of this module is to be called from the command line.
+
+   :Example:
+
+   ``python geomepy.py args``
+
+   or
+
+   ``geomepy args``
+
+"""
 import sys
 import argparse
 import datetime
@@ -20,6 +37,21 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
 def readxyz(fn):
+   """
+      Reads a file in the xyz format and returns an object of class ``geomepy.geometry.Geometry``.
+
+      :param fn: Name of the file to be read
+      :type fn: string
+      :return: The geometry representation of the xyz coordinates
+      :rtype: geomepy.geometry.Geometry
+
+      :Example:
+
+      >>> geom = readxyz("geom.xyz")
+      
+      .. warning:: Does not handle wrongly formatted files
+
+   """
    f = open(fn, 'r')
    lines=f.readlines()
    nat=int(lines[0])
@@ -35,6 +67,19 @@ def readxyz(fn):
    return geom
 
 def main():
+   """
+      usage: geomepy [-h] [-g GEOMS]
+      
+      optional arguments:
+        -h, --help            show this help message and exit
+        -g GEOMS, --geoms GEOMS
+                              geometries to compare in xyz format
+
+      :Example:
+      
+      geomepy -g file1.xyz file2.xyz
+
+   """
    parser = argparse.ArgumentParser()
    parser.add_argument("-g", "--geoms", help="geometries to compare in xyz format", default="../tests/geom1.xyz ../tests/geom2.xyz")
    args = parser.parse_args()

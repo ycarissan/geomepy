@@ -6,6 +6,9 @@ import elements.elements as elements
 import numpy as np
 
 class Geometry:
+   """
+   Class Geometry
+   """
    def __init__(self, geom=None):
       if geom==None:
          self.geom={}
@@ -39,12 +42,21 @@ class Geometry:
       for k in self.geom.keys():
          self.geom[k].move(-orig)
 
-   def getCenterofMass(self):
+   def getCentroid(self):
+      """
+         Returns the barycenter of the geometry.
+
+         :Example:
+
+         >>> geom = Geometry()
+         . . .
+         >>> centroid = geom.getCentroid()
+      """
       pos=np.array([0.,0.,0.])
       tot=0.0
       for k in self.geom.keys():
          a = self.geom[k]
-         mass = float(a.getMass().split()[0])
+#         mass = float(a.getMass().split()[0])
          mass=1.0
          tot += mass
          pos += mass*a.getPos()
@@ -52,7 +64,20 @@ class Geometry:
       return pos/tot
 
    def translateTo(self, geomRef):
-      delta=geomRef.getCenterofMass()-self.getCenterofMass()
+      """
+         Translates the geometry to the center of the geometry given as argument.
+      
+         :parameter geomRef: Reference geometry
+         :type geomRef: geomepy.geometry.Geometry
+      
+         :Example:
+
+         >>> geomRef = Geometry()
+         >>> geom = Geometry()
+         . . .
+         >>> geom.translateTo(geomRef)
+      """
+      delta=geomRef.getCentroid()-self.getCentroid()
       logging.info("DELTA = {0}".format(delta))
       for k in self.geom.keys():
          self.geom[k].pos += delta
