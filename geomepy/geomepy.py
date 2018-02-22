@@ -29,13 +29,6 @@ else:
 import logging
 import numpy as np
 
-logging.basicConfig(filename='geomepy.log',level=logging.INFO)
-console = logging.StreamHandler()
-console.setLevel(logging.INFO)
-formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
-console.setFormatter(formatter)
-logging.getLogger('').addHandler(console)
-
 def readxyz(fn):
    """
       Reads a file in the xyz format and returns an object of class ``geomepy.geometry.Geometry``.
@@ -80,6 +73,14 @@ def main():
       geomepy -g file1.xyz file2.xyz
 
    """
+
+   logging.basicConfig(filename='geomepy.log',level=logging.INFO)
+   console = logging.StreamHandler()
+   console.setLevel(logging.INFO)
+   formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+   console.setFormatter(formatter)
+   logging.getLogger('').addHandler(console)
+
    parser = argparse.ArgumentParser()
    parser.add_argument("-g", "--geoms", help="geometries to compare in xyz format", default="../tests/geom1.xyz ../tests/geom2.xyz")
    args = parser.parse_args()
